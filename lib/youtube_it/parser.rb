@@ -515,6 +515,8 @@ class YouTubeIt
         videos  = []
         doc     = REXML::Document.new(content)
         feed    = doc.elements["feed"]
+        return feed
+=begin
         if feed
           feed_id            = feed.elements["id"].text
           updated_at         = Time.parse(feed.elements["updated"].text)
@@ -533,6 +535,7 @@ class YouTubeIt
           :offset             => offset || nil,
           :max_result_count   => max_result_count || nil,
           :videos             => videos)
+=end
       end
     end
   end
