@@ -573,8 +573,10 @@ class YouTubeIt
           :max_result_count   => max_result_count || nil,
           :videos             => videos)
       end
-      def parse_history(entry)        
-        media_group = entry.elements["media:group"]
+      def parse_history(entry)  
+        unless entry.elements["media:group"].nil?    
+          media_group = entry.elements["media:group"]
+        end          
         
         ytid = nil
         unless media_group.elements["yt:videoid"].nil?
