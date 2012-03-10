@@ -313,7 +313,7 @@ class YouTubeIt
       end
       
       def history_videos(user)
-        subscription_url = "/feeds/api/users/%s/watch_history?v=2" % (user ? user : "default")
+        subscription_url = "/feeds/api/users/default/watch_history"
         response         = yt_session.get(subscription_url)
         
         return YouTubeIt::Parser::VideosFeedParser.new(response.body).parse
