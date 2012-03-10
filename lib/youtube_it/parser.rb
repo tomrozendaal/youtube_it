@@ -343,7 +343,7 @@ class YouTubeIt
         video_id = entry.elements["id"].text
         published_at  = entry.elements["published"] ? Time.parse(entry.elements["published"].text) : nil
         updated_at    = entry.elements["updated"] ? Time.parse(entry.elements["updated"].text) : nil
-=begin
+
         # parse the category and keyword lists
         categories = []
         keywords = []
@@ -363,6 +363,7 @@ class YouTubeIt
         end
 
         title = entry.elements["title"].text
+=begin
         
         html_content = entry.elements["content"] ? entry.elements["content"].text : nil
 
