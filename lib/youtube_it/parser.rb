@@ -578,7 +578,7 @@ class YouTubeIt
           media_group = entry.elements["media:group"]
         end          
         
-        #ytid = nil
+        ytid = nil
         #unless media_group.elements["yt:videoid"].nil?
           #ytid = media_group.elements["yt:videoid"].text
         #end   
