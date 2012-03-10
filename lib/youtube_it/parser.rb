@@ -576,14 +576,10 @@ class YouTubeIt
       def parse_history(entry)  
         media_group = entry.elements["media:group"]
 
-        ytid = nil
         
-        unless media_group.elements["yt:duration"].nil?
-          ytid = media_group.elements["yt:duration"].attributes["seconds"].to_i
-        end
         
         YouTubeIt::Model::Video.new(
-          :unique_id      => ytid)
+          :unique_id      => media_group)
       end
     end
   end
