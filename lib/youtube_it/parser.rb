@@ -363,7 +363,8 @@ class YouTubeIt
 
         title = entry.elements["title"].text
         #!#
-        html_content = entry.elements["content"] ? entry.elements["content"].text : nil
+        html_content = nil
+        #html_content = entry.elements["content"] ? entry.elements["content"].text : nil
 
         # parse the author
         author_element = entry.elements["author"]
@@ -526,11 +527,11 @@ class YouTubeIt
           max_result_count   = feed.elements["openSearch:itemsPerPage"].text.to_i
 
           feed.elements.each("entry") do |entry|
-            #videos << parse_entry(entry)
+            videos << parse_entry(entry)
           end
         end
         return feed
-=begin
+
         YouTubeIt::Response::VideoSearch.new(
           :feed_id            => feed_id || nil,
           :updated_at         => updated_at || nil,
@@ -538,7 +539,6 @@ class YouTubeIt
           :offset             => offset || nil,
           :max_result_count   => max_result_count || nil,
           :videos             => videos)
-=end
       end
     end
   end
