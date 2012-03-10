@@ -515,8 +515,7 @@ class YouTubeIt
         videos  = []
         doc     = REXML::Document.new(content)
         feed    = doc.elements["feed"]
-        return feed
-=begin
+
         if feed
           feed_id            = feed.elements["id"].text
           updated_at         = Time.parse(feed.elements["updated"].text)
@@ -528,6 +527,8 @@ class YouTubeIt
             videos << parse_entry(entry)
           end
         end
+        return feed
+=begin
         YouTubeIt::Response::VideoSearch.new(
           :feed_id            => feed_id || nil,
           :updated_at         => updated_at || nil,
