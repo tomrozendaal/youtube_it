@@ -515,20 +515,20 @@ class YouTubeIt
         videos  = []
         doc     = REXML::Document.new(content)
         feed    = doc.elements["feed"]
-
+        return feed
+=begin
         if feed
-          #feed_id            = feed.elements["id"].text
-          #updated_at         = Time.parse(feed.elements["updated"].text)
-          #total_result_count = feed.elements["openSearch:totalResults"].text.to_i
-          #offset             = feed.elements["openSearch:startIndex"].text.to_i
-          #max_result_count   = feed.elements["openSearch:itemsPerPage"].text.to_i
+          feed_id            = feed.elements["id"].text
+          updated_at         = Time.parse(feed.elements["updated"].text)
+          total_result_count = feed.elements["openSearch:totalResults"].text.to_i
+          offset             = feed.elements["openSearch:startIndex"].text.to_i
+          max_result_count   = feed.elements["openSearch:itemsPerPage"].text.to_i
 
           feed.elements.each("entry") do |entry|
             videos << parse_entry(entry)
           end
         end
-        return feed
-=begin
+
         YouTubeIt::Response::VideoSearch.new(
           :feed_id            => feed_id || nil,
           :updated_at         => updated_at || nil,
