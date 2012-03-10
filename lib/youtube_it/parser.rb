@@ -365,9 +365,7 @@ class YouTubeIt
         unless entry.elements["title"].nil?
           title = entry.elements["title"].text
         end
-        
-=begin
-        
+                
         html_content = entry.elements["content"] ? entry.elements["content"].text : nil
 
         # parse the author
@@ -471,9 +469,6 @@ class YouTubeIt
           }
           
         end
-=end
-        html_content,author,description,duration,media_content,player_url,thumbnails,rating,view_count,favorite_count,widescreen,noembed,racy,where,position,latitude,longitude,state,ytid = nil
-        
           
         YouTubeIt::Model::Video.new(
           :video_id       => video_id,
