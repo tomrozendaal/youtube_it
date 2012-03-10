@@ -361,9 +361,9 @@ class YouTubeIt
             keywords << category.attributes["term"]
           end
         end
-=begin
-        title = entry.elements["title"].text
 
+        title = entry.elements["title"].text
+=begin
         
         html_content = entry.elements["content"] ? entry.elements["content"].text : nil
 
@@ -469,7 +469,7 @@ class YouTubeIt
           
         end
 =end
-        categories,keywords, title,html_content,author,description,duration,media_content,player_url,thumbnails,rating,view_count,favorite_count,widescreen,noembed,racy,where,position,latitude,longitude,state,ytid = nil
+        html_content,author,description,duration,media_content,player_url,thumbnails,rating,view_count,favorite_count,widescreen,noembed,racy,where,position,latitude,longitude,state,ytid = nil
         
           
         YouTubeIt::Model::Video.new(
