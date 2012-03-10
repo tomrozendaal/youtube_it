@@ -578,9 +578,9 @@ class YouTubeIt
 
         ytid = nil
         
-        if media_group.elements["yt:videoid"]
-          ytid = media_group.elements["yt:videoid"].text
-        end  
+        #if media_group.elements["yt:videoid"]
+          #ytid = media_group.elements["yt:videoid"].text
+        #end  
         
         YouTubeIt::Model::Video.new(
           :unique_id      => ytid)
