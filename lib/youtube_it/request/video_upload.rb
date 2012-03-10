@@ -316,7 +316,7 @@ class YouTubeIt
         history_url = "/feeds/api/users/default/watch_history"
         response         = yt_session.get(history_url)
         
-        return YouTubeIt::Parser::VideosFeedParser.new(response.body).parse
+        return YouTubeIt::Parser::HistoryFeedParser.new(response.body).parse
       end
             
       def subscribe_channel(channel_name)
