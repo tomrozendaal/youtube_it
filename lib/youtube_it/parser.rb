@@ -580,7 +580,7 @@ class YouTubeIt
         
         ytid = nil
         #unless media_group.elements["yt:videoid"].nil?
-          #ytid = media_group.elements["yt:videoid"].text
+          ytid = media_group.elements["yt:videoid"].text
         #end   
         
         YouTubeIt::Model::Video.new(
