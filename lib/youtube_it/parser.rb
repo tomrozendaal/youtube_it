@@ -362,9 +362,8 @@ class YouTubeIt
         end
 
         title = entry.elements["title"].text
-        #!#
-        html_content = nil
-        #html_content = entry.elements["content"] ? entry.elements["content"].text : nil
+        
+        html_content = entry.elements["content"] ? entry.elements["content"].text : nil
 
         # parse the author
         author_element = entry.elements["author"]
@@ -447,6 +446,7 @@ class YouTubeIt
 
         noembed = entry.elements["yt:noembed"] ? true : false
         racy = entry.elements["media:rating"] ? true : false
+=begin
         #!#
         if where = entry.elements["georss:where"]
           position = where.elements["gml:Point"].elements["gml:pos"].text
@@ -465,7 +465,7 @@ class YouTubeIt
           }
           
         end
-
+=end
         YouTubeIt::Model::Video.new(
           :video_id       => video_id,
           :published_at   => published_at,
