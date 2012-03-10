@@ -361,9 +361,9 @@ class YouTubeIt
             keywords << category.attributes["term"]
           end
         end
-
-        title = entry.elements["title"].text
 =begin
+        title = entry.elements["title"].text
+
         
         html_content = entry.elements["content"] ? entry.elements["content"].text : nil
 
