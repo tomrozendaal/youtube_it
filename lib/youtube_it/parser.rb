@@ -466,6 +466,12 @@ class YouTubeIt
           
         end
 =end
+        where = nil
+        position = nil
+        latitude, longitude = nil
+        
+        state = nil
+        
         YouTubeIt::Model::Video.new(
           :video_id       => video_id,
           :published_at   => published_at,
