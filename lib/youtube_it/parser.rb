@@ -339,6 +339,7 @@ class YouTubeIt
 
       protected
       def parse_entry(entry)
+=begin
         video_id = entry.elements["id"].text
         published_at  = entry.elements["published"] ? Time.parse(entry.elements["published"].text) : nil
         updated_at    = entry.elements["updated"] ? Time.parse(entry.elements["updated"].text) : nil
@@ -397,7 +398,8 @@ class YouTubeIt
         unless media_group.elements["media:player"].nil?
           player_url = media_group.elements["media:player"].attributes["url"]
         end
-
+        
+        #!#
         unless media_group.elements["yt:aspectRatio"].nil?
           widescreen = media_group.elements["yt:aspectRatio"].text == 'widescreen' ? true : false
         end
@@ -446,7 +448,7 @@ class YouTubeIt
 
         noembed = entry.elements["yt:noembed"] ? true : false
         racy = entry.elements["media:rating"] ? true : false
-=begin
+
         #!#
         if where = entry.elements["georss:where"]
           position = where.elements["gml:Point"].elements["gml:pos"].text
@@ -466,12 +468,9 @@ class YouTubeIt
           
         end
 =end
-        where = nil
-        position = nil
-        latitude, longitude = nil
+        video_id,published_at,updated_at,categories,keywords, title,html_content,author,description,duration,media_content,player_url,thumbnails,rating,view_count,favorite_count,widescreen,noembed,racy,where,position,latitude,longitude,state,ytid = nil
         
-        state = nil
-        
+          
         YouTubeIt::Model::Video.new(
           :video_id       => video_id,
           :published_at   => published_at,
