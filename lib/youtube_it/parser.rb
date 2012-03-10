@@ -339,11 +339,11 @@ class YouTubeIt
 
       protected
       def parse_entry(entry)
-=begin
+
         video_id = entry.elements["id"].text
         published_at  = entry.elements["published"] ? Time.parse(entry.elements["published"].text) : nil
         updated_at    = entry.elements["updated"] ? Time.parse(entry.elements["updated"].text) : nil
-
+=begin
         # parse the category and keyword lists
         categories = []
         keywords = []
@@ -468,7 +468,7 @@ class YouTubeIt
           
         end
 =end
-        video_id,published_at,updated_at,categories,keywords, title,html_content,author,description,duration,media_content,player_url,thumbnails,rating,view_count,favorite_count,widescreen,noembed,racy,where,position,latitude,longitude,state,ytid = nil
+        categories,keywords, title,html_content,author,description,duration,media_content,player_url,thumbnails,rating,view_count,favorite_count,widescreen,noembed,racy,where,position,latitude,longitude,state,ytid = nil
         
           
         YouTubeIt::Model::Video.new(
@@ -535,7 +535,6 @@ class YouTubeIt
             videos << parse_entry(entry)
           end
         end
-        return feed
 
         YouTubeIt::Response::VideoSearch.new(
           :feed_id            => feed_id || nil,
