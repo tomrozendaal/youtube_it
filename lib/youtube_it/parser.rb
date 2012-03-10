@@ -514,6 +514,8 @@ class YouTubeIt
       def parse_content(content)
         videos  = []
         doc     = REXML::Document.new(content)
+        return doc
+=begin
         feed    = doc.elements["feed"]
         if feed
           feed_id            = feed.elements["id"].text
@@ -533,6 +535,7 @@ class YouTubeIt
           :offset             => offset || nil,
           :max_result_count   => max_result_count || nil,
           :videos             => videos)
+=end
       end
     end
   end
