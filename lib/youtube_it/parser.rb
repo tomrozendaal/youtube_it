@@ -574,9 +574,9 @@ class YouTubeIt
           :videos             => videos)
       end
       def parse_history(entry)  
-        unless entry.elements["media:group"].nil?    
+        #unless entry.elements["media:group"].nil?    
           media_group = entry.elements["media:group"]
-        end          
+        #end          
         
         ytid = nil
         #unless media_group.elements["yt:videoid"].nil?
