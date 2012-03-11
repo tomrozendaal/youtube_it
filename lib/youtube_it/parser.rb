@@ -401,7 +401,6 @@ class YouTubeIt
           player_url = media_group.elements["media:player"].attributes["url"]
         end
         
-        #!#
         unless media_group.elements["yt:aspectRatio"].nil?
           widescreen = media_group.elements["yt:aspectRatio"].text == 'widescreen' ? true : false
         end
@@ -451,13 +450,11 @@ class YouTubeIt
         noembed = entry.elements["yt:noembed"] ? true : false
         racy = entry.elements["media:rating"] ? true : false
 
-        #!#
         if where = entry.elements["georss:where"]
           position = where.elements["gml:Point"].elements["gml:pos"].text
           latitude, longitude = position.split(" ")
         end
         
-        #!#
         control = entry.elements["app:control"]
         state = { :name => "published" }
         if control && control.elements["yt:state"]
@@ -542,48 +539,6 @@ class YouTubeIt
           :offset             => offset || nil,
           :max_result_count   => max_result_count || nil,
           :videos             => videos)
-      end
-    end
-    
-    class HistoryFeedParser < VideoFeedParser #:nodoc:
-
-    private
-      def parse_content(content)
-        videos  = []
-        doc     = REXML::Document.new(content)
-        feed    = doc.elements["feed"]
-        
-        if feed
-          feed_id            = feed.elements["id"].text
-          updated_at         = Time.parse(feed.elements["updated"].text)
-          total_result_count = feed.elements["openSearch:totalResults"].text.to_i
-          offset             = feed.elements["openSearch:startIndex"].text.to_i
-          max_result_count   = feed.elements["openSearch:itemsPerPage"].text.to_i
-
-          feed.elements.each("entry") do |entry|
-            videos << parse_history(entry)
-          end
-        end
-
-        YouTubeIt::Response::VideoSearch.new(
-          :feed_id            => feed_id || nil,
-          :updated_at         => updated_at || nil,
-          :total_result_count => total_result_count || nil,
-          :offset             => offset || nil,
-          :max_result_count   => max_result_count || nil,
-          :videos             => videos)
-      end
-      def parse_history(entry)  
-        media_group = entry.elements["media:group"]
-
-        ytid = nil
-        unless media_group.elements["yt:videoid"].nil?
-          ytid = media_group.elements["yt:videoid"].text
-        end 
-        
-        
-        YouTubeIt::Model::Video.new(
-          :unique_id      => ytid)
       end
     end
   end
