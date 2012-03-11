@@ -576,7 +576,7 @@ class YouTubeIt
       def parse_history(entry)  
         media_group = REXML::Document.new(entry.elements["media:group"])
         
-        ytid = media_group.elements["yt:videoid"]
+        ytid = media_group.elements["yt:videoid"].text
         
         
         YouTubeIt::Model::Video.new(
