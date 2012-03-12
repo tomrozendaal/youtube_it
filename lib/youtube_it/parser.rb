@@ -548,13 +548,9 @@ class YouTubeIt
       def parse_content(content)
         videos  = []
         doc     = REXML::Document.new(content)
-        return doc
-=begin
         feed    = doc.elements["feed"]
 
         if feed
-          feed_id            = feed.elements["id"].text
-          updated_at         = Time.parse(feed.elements["updated"].text)
           total_result_count = feed.elements["openSearch:totalResults"].text.to_i
           offset             = feed.elements["openSearch:startIndex"].text.to_i
           max_result_count   = feed.elements["openSearch:itemsPerPage"].text.to_i
@@ -565,16 +561,46 @@ class YouTubeIt
         end
 
         YouTubeIt::Response::VideoSearch.new(
-          :feed_id            => feed_id || nil,
-          :updated_at         => updated_at || nil,
           :total_result_count => total_result_count || nil,
           :offset             => offset || nil,
           :max_result_count   => max_result_count || nil,
-          :videos             => videos)
-=end         
+          :videos             => videos)         
       end
       def parse_gallery
+        video_id = entry.elements["id"].text
         
+        unless entry.elements["title"].nil?
+          title = entry.elements["title"].text
+        end
+        
+        media_group = entry.elements["media:group"]
+
+        ytid = nil
+        unless media_group.elements["yt:videoid"].nil?
+          ytid = media_group.elements["yt:videoid"].text
+        end  
+        
+        thumbnails = []
+        media_group.elements.each("media:thumbnail") do |thumb_element|
+          # TODO: convert time HH:MM:ss string to seconds?
+          thumbnails << YouTubeIt::Model::Thumbnail.new(
+                          :url    => thumb_element.attributes["url"],
+                          :height => thumb_element.attributes["height"].to_i,
+                          :width  => thumb_element.attributes["width"].to_i,
+                          :time   => thumb_element.attributes["time"])
+        end
+        
+        player_url = ""
+        unless media_group.elements["media:player"].nil?
+          player_url = media_group.elements["media:player"].attributes["url"]
+        end   
+        
+        YouTubeIt::Model::Video.new(
+          :video_id       => video_id,
+          :title          => title,
+          :player_url     => player_url,
+          :thumbnails     => thumbnails,
+          :unique_id      => ytid)
       end
     end
   end
