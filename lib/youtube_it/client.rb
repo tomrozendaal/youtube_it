@@ -206,6 +206,32 @@ class YouTubeIt
       client.new_subscription_videos(user_id)
     end
     
+    def gallery_videos(params, options={})
+      request_params = params.respond_to?(:to_hash) ? params : options
+      request_params[:page] = integer_or_default(request_params[:page], 1)
+
+      request_params[:dev_key] = @dev_key if @dev_key
+
+      unless request_params[:max_results]
+        request_params[:max_results] = integer_or_default(request_params[:per_page], 25)
+      end
+
+      unless request_params[:offset]
+        request_params[:offset] = calculate_offset(request_params[:page], request_params[:max_results] )
+      end
+
+      if params.respond_to?(:to_hash) and not params[:user]
+        request = YouTubeIt::Request::VideoSearch.new(request_params)
+      elsif (params.respond_to?(:to_hash) && params[:user]) || (params == :favorites)
+        request = YouTubeIt::Request::UserSearch.new(params, request_params)
+      else
+        request = YouTubeIt::Request::StandardSearch.new(params, request_params)
+      end
+
+      parser = YouTubeIt::Parser::GalleryFeedParser.new(request.url)
+      parser.parse
+    end
+    
     def history_videos(user_id = nil)
       client.history_videos(user_id)
     end
