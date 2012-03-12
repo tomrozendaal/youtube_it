@@ -581,7 +581,8 @@ class YouTubeIt
         end  
         
         thumbnails = []
-        media_group.elements.each("media:thumbnail") do |thumb_element|
+        #media_group.elements.each("media:thumbnail") do |thumb_element|
+        thumb_element = media_group.elements["media:thumbnail"][0]
           # TODO: convert time HH:MM:ss string to seconds?
           thumbnails << YouTubeIt::Model::Thumbnail.new(
                           :url    => thumb_element.attributes["url"],
