@@ -556,7 +556,7 @@ class YouTubeIt
           max_result_count   = feed.elements["openSearch:itemsPerPage"].text.to_i
 
           feed.elements.each("entry") do |entry|
-            videos << parse_entry(entry)
+            videos << parse_gallery(entry)
           end
         end
 
@@ -566,7 +566,7 @@ class YouTubeIt
           :max_result_count   => max_result_count || nil,
           :videos             => videos)         
       end
-      def parse_gallery
+      def parse_gallery(entry)
         video_id = entry.elements["id"].text
         
         unless entry.elements["title"].nil?
