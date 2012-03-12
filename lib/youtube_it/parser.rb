@@ -589,7 +589,7 @@ class YouTubeIt
                           :height => thumb_element.attributes["height"].to_i,
                           :width  => thumb_element.attributes["width"].to_i,
                           :time   => thumb_element.attributes["time"])
-        end
+        #end
         
         player_url = ""
         unless media_group.elements["media:player"].nil?
