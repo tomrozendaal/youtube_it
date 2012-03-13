@@ -228,7 +228,7 @@ class YouTubeIt
         request = YouTubeIt::Request::StandardSearch.new(params, request_params)
       end
       
-      
+      request.url << "&fields=id,title,media:group(media:player,media:thumbnail,yt:videoid)"
       
       return request.url
 
