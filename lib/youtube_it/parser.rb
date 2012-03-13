@@ -551,19 +551,12 @@ class YouTubeIt
         feed    = doc.elements["feed"]
 
         if feed
-          total_result_count = feed.elements["openSearch:totalResults"].text.to_i
-          offset             = feed.elements["openSearch:startIndex"].text.to_i
-          max_result_count   = feed.elements["openSearch:itemsPerPage"].text.to_i
-
           feed.elements.each("entry") do |entry|
             videos << parse_gallery(entry)
           end
         end
 
         YouTubeIt::Response::VideoSearch.new(
-          :total_result_count => total_result_count || nil,
-          :offset             => offset || nil,
-          :max_result_count   => max_result_count || nil,
           :videos             => videos)         
       end
       def parse_gallery(entry)
