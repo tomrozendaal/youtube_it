@@ -227,9 +227,13 @@ class YouTubeIt
       else
         request = YouTubeIt::Request::StandardSearch.new(params, request_params)
       end
+      
+      
+      
+      return request.url
 
-      parser = YouTubeIt::Parser::GalleryFeedParser.new(request.url)
-      parser.parse
+      #parser = YouTubeIt::Parser::GalleryFeedParser.new(request.url)
+      #parser.parse
     end
     
     def history_videos(user_id = nil)
