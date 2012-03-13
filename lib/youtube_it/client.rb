@@ -231,9 +231,8 @@ class YouTubeIt
       #request.url << "&fields=entry(title,id,media:group(media:thumbnail,media:player,yt:videoid))"
       request.url << "&fields=entry(media:group(media:thumbnail[@yt:name='default']))"
       
-      return request.url
-      #parser = YouTubeIt::Parser::GalleryFeedParser.new(request.url)
-      #parser.parse
+      parser = YouTubeIt::Parser::GalleryFeedParser.new(request.url)
+      parser.parse
     end
     
     def history_videos(user_id = nil)

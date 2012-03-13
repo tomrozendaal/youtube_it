@@ -559,19 +559,8 @@ class YouTubeIt
         YouTubeIt::Response::VideoSearch.new(
           :videos             => videos)         
       end
-      def parse_gallery(entry)
-        video_id = entry.elements["id"].text
-        
-        unless entry.elements["title"].nil?
-          title = entry.elements["title"].text
-        end
-        
+      def parse_gallery(entry)     
         media_group = entry.elements["media:group"]
-
-        ytid = nil
-        unless media_group.elements["yt:videoid"].nil?
-          ytid = media_group.elements["yt:videoid"].text
-        end  
         
         thumbnails = []
         media_group.elements.each("media:thumbnail") do |thumb_element|
@@ -583,10 +572,25 @@ class YouTubeIt
                           :time   => thumb_element.attributes["time"])
         end
         
+        YouTubeIt::Model::Video.new(
+          :thumbnails     => thumbnails)
+=begin        
+                
         player_url = ""
         unless media_group.elements["media:player"].nil?
           player_url = media_group.elements["media:player"].attributes["url"]
         end   
+        
+        video_id = entry.elements["id"].text
+        
+        unless entry.elements["title"].nil?
+          title = entry.elements["title"].text
+        end
+
+        ytid = nil
+        unless media_group.elements["yt:videoid"].nil?
+          ytid = media_group.elements["yt:videoid"].text
+        end 
         
         YouTubeIt::Model::Video.new(
           :video_id       => video_id,
@@ -594,6 +598,7 @@ class YouTubeIt
           :player_url     => player_url,
           :thumbnails     => thumbnails,
           :unique_id      => ytid)
+=end          
       end
     end
   end
