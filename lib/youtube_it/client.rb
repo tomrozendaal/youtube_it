@@ -229,7 +229,7 @@ class YouTubeIt
       end
       
       #request.url << "&fields=entry(title,id,media:group(media:thumbnail,media:player,yt:videoid))"
-      request.url << "&fields=entry(media:group(media:thumbnail[@yt:name='default']))"
+      request.url << "&fields=entry(yt:statistics,media:group(media:thumbnail[@yt:name='default']))"
       
       parser = YouTubeIt::Parser::GalleryFeedParser.new(request.url)
       parser.parse

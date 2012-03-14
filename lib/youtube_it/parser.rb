@@ -559,7 +559,9 @@ class YouTubeIt
         YouTubeIt::Response::VideoSearch.new(
           :videos             => videos)         
       end
-      def parse_gallery(entry)     
+      def parse_gallery(entry)   
+        views = entry.elements["yt:statistics"].attributes["viewCount"]
+          
         media_group = entry.elements["media:group"]
         
         thumbnails = []
@@ -573,7 +575,8 @@ class YouTubeIt
         end
         
         YouTubeIt::Model::Video.new(
-          :thumbnails     => thumbnails)
+          :thumbnails     => thumbnails,
+          :views          => views)
 =begin        
                 
         player_url = ""
