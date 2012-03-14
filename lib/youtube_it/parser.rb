@@ -576,7 +576,7 @@ class YouTubeIt
         
         YouTubeIt::Model::Video.new(
           :thumbnails     => thumbnails,
-          :views          => views)
+          :view_count          => views)
 =begin        
                 
         player_url = ""
